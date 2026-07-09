@@ -1,0 +1,14 @@
+[project]
+name = "upper-limb-rehab-mediapipe"
+version = "0.1.0"
+description = "MediaPipe-based upper limb rehabilitation motion analysis prototype."
+requires-python = ">=3.10"
+dependencies = [
+  "mediapipe>=0.10.14",
+  "opencv-python>=4.9.0",
+  "numpy>=1.26.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
