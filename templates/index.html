@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>上肢復健動作輔助系統</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="camera-area" aria-label="攝影機畫面">
+        <div class="topbar">
+          <div>
+            <h1>上肢復健動作輔助系統</h1>
+            <p>MediaPipe PoseLandmarker 即時角度分析</p>
+          </div>
+          <div class="status-pill" id="connectionStatus">連線中</div>
+        </div>
+
+        <div class="video-frame">
+          <img id="videoFeed" src="{{ url_for('video_feed') }}" alt="即時攝影機畫面">
+        </div>
+      </section>
+
+      <aside class="control-panel" aria-label="動作狀態">
+        <section class="panel-section current-action">
+          <span class="section-label">目前動作</span>
+          <strong id="actionText">起始位置</strong>
+          <span id="feedbackText">請站到鏡頭前，讓上半身完整入鏡。</span>
+        </section>
+
+        <section class="panel-section metrics-grid">
+          <div class="metric">
+            <span>完成次數</span>
+            <strong><span id="totalCount">0</span>/<span id="targetCount">5</span></strong>
+          </div>
+          <div class="metric">
+            <span>平均分數</span>
+            <strong id="scoreText">0.0</strong>
+          </div>
+          <div class="metric">
+            <span>肩膀角度</span>
+            <strong id="angleText">--</strong>
+          </div>
+          <div class="metric">
+            <span>階段</span>
+            <strong id="stageText">WAIT_S1</strong>
+          </div>
+        </section>
+
+        <section class="panel-section">
+          <span class="section-label">動作完成指示</span>
+          <div class="indicator-row">
+            <span class="lamp" id="s1Lamp"></span>
+            <div>
+              <strong>中段動作</strong>
+              <span>手臂抬到 S1 範圍</span>
+            </div>
+          </div>
+          <div class="indicator-row">
+            <span class="lamp" id="s2Lamp"></span>
+            <div>
+              <strong>上舉動作</strong>
+              <span>手臂達到 S2 範圍</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel-section">
+          <div class="progress-header">
+            <span class="section-label">總進度</span>
+            <strong id="progressText">0%</strong>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </section>
+
+        <section class="panel-section controls">
+          <label for="targetInput">目標次數</label>
+          <div class="control-row">
+            <input id="targetInput" type="number" min="1" max="50" value="5">
+            <button id="setTargetButton" type="button">套用</button>
+            <button id="resetButton" type="button">重置</button>
+          </div>
+        </section>
+
+        <section class="panel-section note">
+          <span class="section-label">拍攝提醒</span>
+          <p>請讓肩膀、手肘與髖部清楚入鏡。手臂完成上舉後，慢慢回到起始位置，系統才會準備計算下一次。</p>
+        </section>
+      </aside>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  </body>
+</html>

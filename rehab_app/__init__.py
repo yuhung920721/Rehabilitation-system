@@ -1,0 +1,1 @@
+"""Flask rehabilitation app package."""
